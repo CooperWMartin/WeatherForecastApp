@@ -1,0 +1,64 @@
+plugins {
+  id 'application'
+	id 'java'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.6'
+  id 'org.springdoc.openapi-gradle-plugin' version '1.9.0'
+}
+
+group = 'com.CooperWMartin'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+	implementation 'org.json:json:20240303'
+  implementation 'com.fasterxml.jackson.core:jackson-databind'
+  implementation 'com.fasterxml.jackson.core:jackson-core'
+  implementation 'com.fasterxml.jackson.core:jackson-annotations'
+
+  implementation 'org.apache.logging.log4j:log4j-core'
+
+	implementation 'jakarta.persistence:jakarta.persistence-api'
+
+	runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+  testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src/main/java']
+    }
+  }
+  test {
+    java {
+      srcDirs = ['src/test/java']
+    }
+  }
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+application {
+    mainClass = 'com.CooperWMartin.WeatherForecastApp.WeatherForecastApp'  // Replace with your actual main class
+}
